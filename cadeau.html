@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Jouw Cadeau! 🎁</title>
+    <script>
+        function checkToegang() {
+            const cookies = document.cookie.split('; ');
+            const cookieData = cookies.find(row => row.startsWith('Sessie_Sleutel='));
+            const waarde = cookieData ? cookieData.split('=')[1] : null;
+            if (waarde !== "Demi21Party") {
+                window.location.href = "index.html";
+            }
+        }
+        checkToegang();
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+        body { background: linear-gradient(135deg, #ffd1ff 0%, #fae1dd 100%); color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; margin: 0; padding: 20px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 600px; width: 95%; background: rgba(255, 255, 255, 0.95); padding: 40px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2); }
+        h2 { color: #ff4d85; font-size: 2.5em; margin-bottom: 10px; margin-top: 0; }
+        .intro-text { font-size: 1.2em; color: #555; }
+        .niels-foto { width: 100%; max-width: 350px; border: 6px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.2); border-radius: 10px; transform: rotate(2deg); margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Jouw Cadeau 🎁</h2>
+        <p class="intro-text"><strong>We gaan samen heerlijk uit eten!</strong></p>
+        <p style="color: #777;">En zoals je kunt zien... ik heb geen keus, excuses worden niet geaccepteerd! 😉</p>
+        
+        <img src="uitetenniels.png" alt="Niels moet mee uit eten" class="niels-foto">
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Verjaardag - Demi 21</title>
+    <style>
+        body { background-color: #000; margin: 0; overflow: hidden; font-family: 'Courier New', Courier, monospace; }
+        #matrix { position: fixed; top: 0; left: 0; z-index: -1; }
+        .login-box {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 20, 0, 0.9);
+            padding: 40px; border: 2px solid #00ff00;
+            box-shadow: 0 0 20px #00ff00; text-align: center; color: #00ff00;
+            max-width: 400px; /* Zorgt dat het kastje niet te breed wordt met lange hints */
+        }
+        input { 
+            padding: 12px; width: 250px; background: #000; 
+            border: 1px solid #00ff00; color: #00ff00; margin-bottom: 20px; 
+            text-align: center; font-size: 1.1em; outline: none;
+        }
+        
+        /* Hoofdknop */
+        .main-btn { 
+            padding: 10px 25px; background: #00ff00; color: #000; 
+            border: none; cursor: pointer; font-weight: bold; font-size: 1em;
+        }
+        .main-btn:hover { background: #00cc00; box-shadow: 0 0 10px #00ff00; }
+        
+        /* Hint knop */
+        .hint-btn {
+            background: transparent; color: #00ff00; border: 1px solid #00ff00;
+            padding: 5px 15px; margin-top: 20px; cursor: pointer;
+            font-family: 'Courier New', Courier, monospace; font-size: 0.9em;
+        }
+        .hint-btn:hover { background: #005500; }
+
+        /* De container waar de hints in komen */
+        #hintContainer {
+            margin-top: 15px;
+            text-align: left; /* Lijnt de hints netjes links uit */
+        }
+
+        /* Stijl voor elke losse hint */
+        .hint-text { 
+            color: #ffff00; font-size: 0.9em; 
+            margin: 5px 0; text-shadow: 0 0 5px #ffff00; 
+        }
+    </style>
+</head>
+<body> 
+    <canvas id="matrix"></canvas>
+    
+    <div class="login-box">
+        <h1>SYSTEEM VERGRENDELD</h1>
+        <p>Toegang krijg je niet zomaar: <strong>DEMI</strong></p>
+        
+        <input type="password" id="passwordInput" placeholder="VOER TOEGANGSCODE IN" onkeydown="if(event.key === 'Enter') checkPassword()">
+        <br>
+        <button class="main-btn" onclick="checkPassword()">ONTGRENDELEN</button>
+        <br>
+        
+        <button id="hintKnop" class="hint-btn" onclick="toonVolgendeHint()">HULP NODIG?</button>
+        
+        <div id="hintContainer"></div>
+    </div>
+
+    <script>
+        // Dit is een 'Array' (lijst) met alle hints op volgorde
+        const hints = [
+            "Hint 1: Klik op je rechtermuisknop en kies voor 'Inspecteren'.",
+            "Hint 2: Zoek ergens waar wij beiden erg van kunnen smullen 🍪",
+            "Hint 3: Kijk bovenin bij het tabblad 'Sources' en open het .js bestand.",
+            "Hint 4: Het echte geheim staat bij het tabblad 'Application'"
+        ];
+        
+        // Deze variabele houdt bij bij welke hint we zijn (begint bij 0)
+        let huidigeHint = 0;
+
+        function toonVolgendeHint() {
+            // Zolang we nog niet alle hints hebben gehad...
+            if (huidigeHint < hints.length) {
+                const container = document.getElementById("hintContainer");
+                
+                // Maak een nieuw HTML elementje aan (<p>)
+                const nieuweHint = document.createElement("p");
+                nieuweHint.className = "hint-text";
+                nieuweHint.innerText = hints[huidigeHint]; // Haal de tekst uit de lijst
+                
+                // Zet de nieuwe hint in de container
+                container.appendChild(nieuweHint);
+                
+                // Hoog de teller op voor de volgende keer klikken
+                huidigeHint++;
+                
+                // Verander de tekst van de knop
+                document.getElementById("hintKnop").innerText = "NOG EEN HINT?";
+            }
+            
+            // Als alle hints zijn getoond, verberg dan de knop
+            if (huidigeHint === hints.length) {
+                document.getElementById("hintKnop").style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
